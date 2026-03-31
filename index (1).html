@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRACE ATTLIER✿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ROOT COLORS — change these to retheme the whole site
+   ============================================================ */
+:root {
+  --blush:         #f7c5d0;
+  --rose:          #e8a0b0;
+  --deep-rose:     #c97a8f;
+  --lavender:      #d8c6e8;
+  --soft-lavender: #ede6f5;
+  --beige:         #f5ede3;
+  --warm-beige:    #ede0d0;
+  --cream:         #fdf8f3;
+  --text-dark:     #3d2c35;
+  --text-mid:      #7a5c68;
+  --text-light:    #b08898;
+  --white:         #fffcfa;
+  --sage:          #c8d8c0;
+  --black:         #000000;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.4;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  padding: 18px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(253,248,243,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(247,197,208,0.3);
+}
+.nav-logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem; color: var(--deep-rose);
+  cursor: pointer; text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none;
+  position: relative; transition: color 0.3s; cursor: pointer;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1.5px; background: var(--deep-rose);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--deep-rose); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* ============================================================
+   PAGE SYSTEM
+   ============================================================ */
+.page { display: none; min-height: unset; }
+.page.active { display: flex; flex-direction: column; min-height: 100vh;}
+
+/* ============================================================
+   SHARED UTILITIES
+   ============================================================ */
+.section-eyebrow {
+  font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--deep-rose); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700; color: var(--text-dark);
+  line-height: 1.2; margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 1rem; font-weight: 300;
+  line-height: 1.8; color: var(--text-mid); max-width: 560px;
+}
+.page-header {
+  padding: 130px 60px 60px;
+  text-align: center;
+  background: linear-gradient(160deg, var(--cream), var(--beige), var(--soft-lavender));
+  position: relative; overflow: hidden;
+}
+.page-header .section-desc { margin: 0 auto; }
+.page-header-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.4; pointer-events: none;
+}
+.btn-primary {
+  padding: 14px 32px; background: var(--deep-rose); color: white;
+  border: none; border-radius: 50px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(201,122,143,0.3);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(201,122,143,0.5); background: #be6c82; }
+.btn-outline {
+  padding: 13px 32px; background: transparent;
+  color: var(--deep-rose); border: 1.5px solid var(--deep-rose);
+  border-radius: 50px; font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover { background: var(--blush); transform: translateY(-2px); }
+.fade-up { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.divider { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 0; }
+.divider-line { width: 80px; height: 1px; background: var(--blush); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  margin-top: auto;
+  padding: 36px 60px; background: var(--text-dark);
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 1;
+}
+.footer-logo { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--blush); }
+.footer-text { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none; cursor: pointer; transition: color 0.3s; }
+.footer-links a:hover { color: var(--blush); }
+
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 120px 60px 80px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 50%, var(--soft-lavender) 100%);
+}
+.hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45; animation: floatBlob 8s ease-in-out infinite; }
+.blob-1 { width: 480px; height: 480px; background: var(--blush); top: -100px; right: -100px; }
+.blob-2 { width: 320px; height: 320px; background: var(--lavender); bottom: -60px; left: 30%; animation-delay: 3s; }
+.blob-3 { width: 200px; height: 200px; background: var(--warm-beige); top: 40%; left: -60px; animation-delay: 5s; }
+@keyframes floatBlob { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.04); } }
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--deep-rose); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.1; color: var(--text-dark); margin-bottom: 24px; }
+.hero-title em { font-style: italic; color: var(--deep-rose); }
+.hero-tagline { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--text-mid); max-width: 460px; margin-bottom: 40px; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-visual { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
+.hero-card-stack { position: relative; width: 340px; height: 440px; }
+.hero-card { position: absolute; border-radius: 24px; overflow: hidden; transition: transform 0.4s ease; cursor: pointer; }
+.hero-card:nth-child(1) { width: 220px; height: 290px; top: 0; right: 0; transform: rotate(6deg); box-shadow: 0 20px 60px rgba(201,122,143,0.3); }
+.hero-card:nth-child(2) { width: 200px; height: 260px; bottom: 0; left: 0; transform: rotate(-4deg); box-shadow: 0 20px 60px rgba(197,173,216,0.3); }
+.hero-card:nth-child(3) { width: 180px; height: 230px; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(1deg); box-shadow: 0 20px 60px rgba(180,140,120,0.2); z-index: 3; }
+.hero-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 14px 14px; background: linear-gradient(transparent, rgba(61,44,53,0.55)); }
+.hero-card-overlay span { font-family: 'Dancing Script', cursive; font-size: 1.05rem; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.hero-card:hover { transform: rotate(0deg) scale(1.05) !important; z-index: 10; }
+
+.home-nav-tiles { padding: 70px 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; background: var(--white); }
+.nav-tile { border-radius: 24px; overflow: hidden; cursor: pointer; position: relative; aspect-ratio: 4/3; transition: transform 0.35s ease, box-shadow 0.35s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+.nav-tile:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+.nav-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.nav-tile:hover img { transform: scale(1.06); }
+.nav-tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(61,44,53,0.65) 0%, rgba(61,44,53,0.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 22px; gap: 6px; }
+.nav-tile-label { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; }
+.nav-tile-sub { font-size: 0.78rem; font-weight: 400; color: rgba(255,255,255,0.75); }
+.nav-tile-arrow { position: absolute; top: 18px; right: 18px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.25); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; transform: translateY(6px); opacity: 0; transition: all 0.3s ease; }
+.nav-tile:hover .nav-tile-arrow { transform: translateY(0); opacity: 1; }
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+.about-body { padding: 60px 60px 80px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; background: var(--white); }
+.about-frame-wrap { position: relative; }
+.about-frame { width: 100%; max-width: 420px; aspect-ratio: 3/4; border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; overflow: hidden; animation: morphBlob 10s ease-in-out infinite; box-shadow: 0 30px 80px rgba(201,122,143,0.22); }
+.about-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes morphBlob { 0%,100% { border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%; } 33% { border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%; } 66% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; } }
+.about-badge { position: absolute; bottom: 20px; right: -20px; background: white; border-radius: 20px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 12px; }
+.about-badge-icon { font-size: 1.8rem; }
+.about-badge-text { font-size: 0.78rem; font-weight: 500; color: var(--text-mid); line-height: 1.5; }
+.about-badge-text strong { display: block; color: var(--text-dark); font-size: 0.88rem; }
+.about-content p { font-size: 0.95rem; font-weight: 300; line-height: 1.9; color: var(--text-mid); margin-bottom: 16px; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.tag { padding: 8px 18px; border-radius: 50px; font-size: 0.8rem; font-weight: 500; border: 1.5px solid; }
+.tag-pink  { background: #fff0f3; border-color: var(--blush);     color: var(--deep-rose); }
+.tag-lav   { background: var(--soft-lavender); border-color: var(--lavender); color: #7050a0; }
+.tag-beige { background: var(--beige); border-color: var(--warm-beige); color: var(--text-mid); }
+.tag-sage  { background: #f0f5ee; border-color: var(--sage); color: #5a7050; }
+
+/* ============================================================
+   CARDS SECTION (shared wrapper for makeup / tips)
+   ============================================================ */
+.cards-section { padding: 60px 60px 80px; background: var(--white); }
+
+/* ============================================================
+   MAKEUP CARDS
+   — To add a card: copy a block marked MAKEUP CARD START/END
+   ============================================================ */
+.makeup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+.makeup-card { border-radius: 24px; overflow: hidden; cursor: pointer; transition: transform 0.35s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+.makeup-card:hover { transform: translateY(-8px); }
+.makeup-card-inner { padding: 32px 26px; aspect-ratio: 2/3; min-height: 340px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
+.makeup-card-bg { position: absolute; inset: 0; z-index: 0; }
+.makeup-card-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(61,44,53,0) 0%, rgba(61,44,53,0.05) 60%, transparent 100%); }
+.makeup-card-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.makeup-card-inner > *:not(.makeup-card-bg) { position: relative; z-index: 1; }
+.card-number { position: absolute; top: 18px; right: 22px; z-index: 1; font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; color: rgba(255,255,255,0.3); line-height: 1; }
+.card-big-emoji { font-size: 3rem; margin-bottom: 12px; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 8px; }
+.card-text { font-size: 0.84rem; line-height: 1.7; color: rgba(255,255,255,0.88); }
+.tip-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.75); backdrop-filter: blur(8px); border-radius: 50px; padding: 7px 14px; font-size: 0.76rem; font-weight: 500; color: var(--text-dark); margin-top: 14px; width: fit-content; }
+
+/* ============================================================
+   OOTD CARDS
+   — To add a card: copy a block marked OOTD CARD START/END
+   ============================================================ */
+.ootd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+.ootd-card { border-radius: 20px; padding: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; position: relative; overflow: hidden; background: none; min-height: 300px; }
+.ootd-card:nth-child(2) { background: none; }
+.ootd-card:nth-child(3) { background: none; }
+.ootd-card:nth-child(4) { background: none; }
+.ootd-card:nth-child(5) { background: none; }
+.ootd-card:nth-child(6) { background: none; }
+.ootd-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+.ootd-img { width: 100%; aspect-ratio: 3/5; object-fit: cover;  border-radius: 14px; margin-bottom: 0px; display: block; }
+.ootd-occasion { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); margin-bottom: 6px; }
+.ootd-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 12px; }
+.ootd-emoji { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+.ootd-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.ootd-items li { font-size: 0.82rem; color: var(--text-mid); display: flex; align-items: center; gap: 8px; }
+.ootd-items li::before { content: '✦'; color: var(--deep-rose); font-size: 0.55rem; flex-shrink: 0; }
+
+/* ============================================================
+   TRAVEL CARDS
+   — To add a card: copy a block marked TRAVEL CARD START/END
+   ============================================================ */
+.travel-body { padding: 60px 60px 80px; background: linear-gradient(180deg, var(--beige), var(--soft-lavender)); }
+.travel-featured { border-radius: 28px; padding: 100px 50px;  min-height: 500px; display: flex; align-items: center; justify-content: space-between; gap: 40px; position: relative; overflow: hidden; margin-bottom: 28px; }
+.travel-featured-img { position: absolute; inset: 0; z-index: 0; }
+.travel-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.travel-featured-img::after { content: ''; position: absolute; inset: 0; background: }
+.travel-featured > *:not(.travel-featured-img) { position: relative; z-index: 1; }
+.travel-featured-content .section-eyebrow { color: rgba(255,255,255,0.7); }
+.travel-featured-content .section-title { color: white; margin-bottom: 14px; }
+.travel-featured-content .section-desc { color: rgba(255,255,255,0.85); max-width: 440px; }
+.travel-featured-badge span { font-size: 2rem; }
+.travel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+.travel-card { border-radius: 24px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.07); background: linear-gradient(145deg, #fce8ee, #f7d0da); }
+.travel-card:nth-child(even) { background: linear-gradient(145deg, #e8e0f8, #d8c6e8); }
+.travel-card:hover { transform: translateY(-6px); }
+.travel-card-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.travel-card-body { padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; }
+.travel-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.travel-card-emoji { font-size: 2.4rem; }
+.travel-card-tag { background: rgba(255,255,255,0.7); border-radius: 50px; padding: 5px 12px; font-size: 0.7rem; font-weight: 500; color: var(--text-mid); }
+.travel-card-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-dark); }
+.travel-highlights { display: flex; flex-direction: column; gap: 8px; }
+.travel-highlight { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--text-mid); }
+.travel-highlight-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--deep-rose); flex-shrink: 0; }
+/* ============================================================
+   FOOD CARDS
+   — To add a card: copy a block marked FOOD CARD START/END
+   ============================================================ */
+.food-grid { display: grid; grid-template-columns: repeat(3,1fr); gap:16px;}
+.food-card { border-radius: 20px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; background: none; box-shadow: none; }
+.food-card:nth-child(2), .food-card:nth-child(3), .food-card:nth-child(4), .food-card:nth-child(5), .food-card:nth-child(6) { background: none; }
+.food-card:hover { transform: translateY(-6px); }
+.food-card-img { width: 100%; aspect-ratio: 3/6; object-fit: cover; display: block; border-radius: 20px; }
+.food-card-body { display: none; }
+.food-card-emoji, .food-card-subtitle, .food-card-title, .food-card-desc, .food-rating { display: none; }
+.stars { color: #f0a050; font-size: 0.88rem; }
+.rating-text { font-size: 0.78rem; color: var(--text-light); }
+
+/* ============================================================
+   GALLERY ITEMS
+   — To add a photo: copy a block marked GALLERY ITEM START/END
+   ============================================================ */
+.gallery-body { padding: 60px 60px 80px; background: var(--beige); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+.gallery-item { min-height: 280px; aspect-ratio: 5/6; border-radius: 20px; overflow: hidden; cursor: pointer; position: relative; transition: transform 0.3s ease; }
+.gallery-item[style*="grid-column:span 2"], .gallery-item[style*="grid-column: span 2"] { aspect-ratio: 17/10; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-item-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(61,44,53,0.5)); color: white; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-align: center; transform: translateY(100%); transition: transform 0.3s ease; }
+.gallery-item:hover .gallery-item-label { transform: translateY(0); }
+
+/* ============================================================
+   TIP CARDS
+   — To add a tip: copy a block marked TIP CARD START/END
+   ============================================================ */
+.tips-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.tip-card { padding: 0; border-radius: 20px; border: none; background: none; overflow: hidden; transition: transform 0.3s ease; cursor: default; }
+.tip-card:nth-child(2), .tip-card:nth-child(3), .tip-card:nth-child(4), .tip-card:nth-child(5), .tip-card:nth-child(6) { border-color: none; background: none; }
+.tip-card img { width: 100%; aspect-ratio: 2/4; object-fit: cover; border-radius: 20px; display: block; }
+.tip-card:hover { transform: translateY(-5px); }
+.tip-icon, .tip-title, .tip-text, .tip-quote { display: none; }
+.tip-quote { font-family: 'Dancing Script', cursive; font-size: 1.05rem; color: var(--deep-rose); margin-top: 14px; display: block; }
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.contact-body { padding: 80px 60px; background: linear-gradient(160deg, var(--soft-lavender), var(--beige), var(--blush)); text-align: center; }
+.social-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 40px 0; }
+.social-btn { display: flex; align-items: center; gap: 10px; padding: 13px 26px; background: white; border-radius: 50px; text-decoration: none; color: var(--text-dark); font-size: 0.86rem; font-weight: 500; box-shadow: 0 6px 24px rgba(0,0,0,0.07); transition: all 0.3s ease; border: 1.5px solid transparent; }
+.social-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: var(--blush); color: var(--deep-rose); }
+.contact-form-row { display: flex; justify-content: center; gap: 14px; max-width: 500px; margin: 0 auto; }
+.contact-input { flex: 1; padding: 14px 22px; background: white; border: 1.5px solid var(--blush); border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text-dark); outline: none; transition: border-color 0.3s; }
+.contact-input::placeholder { color: var(--text-light); }
+.contact-input:focus { border-color: var(--deep-rose); }
+
+/* ============================================================
+   MODAL OVERLAY
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(61,44,53,0.55);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--white);
+  border-radius: 28px;
+  width: 100%; max-width: 780px;
+  max-height: 88vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(32px) scale(0.97);
+  transition: transform 0.38s cubic-bezier(0.34,1.3,0.64,1);
+  box-shadow: 0 40px 100px rgba(61,44,53,0.25);
+}
+.modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+.modal-close {
+  position: sticky; top: 0; left: 0; right: 0;
+  display: flex; justify-content: flex-end; padding: 18px 22px 0;
+  z-index: 10;
+}
+.modal-close-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--beige); border: none; cursor: pointer;
+  font-size: 1.1rem; color: var(--text-mid);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.modal-close-btn:hover { background: var(--blush); color: var(--deep-rose); transform: rotate(90deg); }
+
+/* ── TIPS MODAL ── */
+.modal-hero-img {
+  width: 100%; height: 240px; object-fit: cover;
+  display: block; border-radius: 20px;
+  margin: -10px 0 28px;
+}
+.modal-body { padding: 0 36px 36px; }
+.modal-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--deep-rose); margin-bottom: 10px; }
+.modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin-bottom: 18px; line-height: 1.25; }
+.modal-text { font-size: 0.95rem; line-height: 1.9; color: var(--text-mid); margin-bottom: 20px; }
+.modal-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+.modal-photos img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; display: block; }
+.modal-quote { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--deep-rose); margin-top: 20px; display: block; text-align: center; }
+.modal-tips-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 16px 0; }
+.modal-tips-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; line-height: 1.7; color: var(--text-mid); }
+.modal-tips-list li::before { content: '✦'; color: var(--deep-rose); font-size: 0.65rem; flex-shrink: 0; margin-top: 6px; }
+
+/* ── MAKEUP TUTORIAL MODAL ── */
+.tutorial-header { padding: 0 36px 24px; }
+.tutorial-hero { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; margin: -10px 0 24px; display: block; }
+.tutorial-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--soft-lavender); border-radius: 50px; padding: 6px 14px; font-size: 0.75rem; font-weight: 500; color: #7050a0; margin-bottom: 12px; }
+.tutorial-steps { padding: 0 36px 36px; display: flex; flex-direction: column; gap: 20px; }
+.step-card { display: flex; gap: 18px; align-items: flex-start; }
+.step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--blush); color: var(--deep-rose); font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-content { flex: 1; }
+.step-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+.step-text { font-size: 0.87rem; line-height: 1.75; color: var(--text-mid); }
+.step-img { width: 100%; height: 160px; object-fit: cover; border-radius: 14px; margin-top: 12px; display: block; }
+.tutorial-divider { height: 1px; background: var(--blush); margin: 4px 0; }
+.products-section { margin-top: 8px; }
+.products-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+.products-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.product-tag { padding: 7px 14px; background: var(--beige); border: 1px solid var(--warm-beige); border-radius: 50px; font-size: 0.78rem; color: var(--text-mid); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; text-align: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-visual { display: none; }
+  .home-nav-tiles { grid-template-columns: 1fr 1fr; padding: 40px 24px; }
+  .about-body { grid-template-columns: 1fr; padding: 40px 24px 60px; gap: 40px; }
+  .about-frame-wrap { display: none; }
+  .cards-section, .travel-body, .gallery-body, .contact-body { padding: 40px 24px 60px; }
+  .makeup-grid, .ootd-grid, .travel-grid, .food-grid, .tips-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+  .travel-featured { flex-direction: column; padding: 40px 28px; }
+  .page-header { padding: 110px 24px 50px; }
+  .footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 24px; }
+  .ootd-grid {grid-template-columns: repeat(2, 1fr);}
+  .ootd-img {aspect-ratio: 4/5; width: 100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">Grace Atllier ✿</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')"    data-page="home">Home</a></li>
+    <li><a onclick="showPage('about')"   data-page="about">About</a></li>
+    <li><a onclick="showPage('makeup')"  data-page="makeup">Makeup</a></li>
+    <li><a onclick="showPage('ootd')"    data-page="ootd">OOTD</a></li>
+    <li><a onclick="showPage('travel')"  data-page="travel">Travel</a></li>
+    <li><a onclick="showPage('food')"    data-page="food">Food</a></li>
+    <li><a onclick="showPage('gallery')" data-page="gallery">Gallery</a></li>
+    <li><a onclick="showPage('tips')"    data-page="tips">Tips</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+  </ul>
+</nav>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: HOME
+     ████████████████████████████████████████████ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Welcome to your cozy corner</div>
+      <h1 class="hero-title">Your Daily Dose<br>of <em>Inspiration</em></h1>
+      <p class="hero-tagline">A soft, beautiful space to explore beauty, style, travel, and food — because you deserve to feel inspired, confident, and completely yourself every single day. 🌸</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" onclick="showPage('about')">Meet the Blog</a>
+        <a class="btn-outline"  onclick="showPage('tips')">Get Inspired ✨</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-card" onclick="showPage('makeup')">
+          <img src="https://i.imgur.com/mSN3SbR.jpeg" alt="Makeup">
+          <div class="hero-card-overlay"><span>Glam Days 💄</span></div>
+        </div>
+        <div class="hero-card" onclick="showPage('travel')">
+          <img src="https://i.imgur.com/0KGJyGM.jpeg" alt="Travel">
+          <div class="hero-card-overlay"><span>Dream Trips ✈️</span></div>
+        </div>
+        <div class="hero-card" onclick="showPage('ootd')">
+          <img src="https://i.imgur.com/Q7ihnKS.jpg" alt="Fashion">
+          <div class="hero-card-overlay"><span>Today's Vibe 🌸</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick-nav tiles -->
+  <section class="home-nav-tiles">
+    <div class="nav-tile" onclick="showPage('makeup')">
+      <img src="https://i.imgur.com/e2H2Ae8.jpg" alt="Makeup">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">💄 Makeup</div>
+        <div class="nav-tile-sub">Looks, tips & inspo</div>
+      </div>
+    </div>
+    <div class="nav-tile" onclick="showPage('ootd')">
+      <img src="https://i.imgur.com/n0RyceX.jpg" alt="OOTD">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">👗 OOTD</div>
+        <div class="nav-tile-sub">Outfit ideas for every mood</div>
+      </div>
+    </div>
+    <div class="nav-tile" onclick="showPage('travel')">
+      <img src="https://i.imgur.com/H1KBlyb.jpg" alt="Travel">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">✈️ Travel</div>
+        <div class="nav-tile-sub">Dream destinations</div>
+      </div>
+    </div>
+    <div class="nav-tile" onclick="showPage('food')">
+      <img src="https://i.imgur.com/wAYxeVP.jpg" alt="Food">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">🍰 Foodie</div>
+        <div class="nav-tile-sub">Cafés, treats & finds</div>
+      </div>
+    </div>
+    <div class="nav-tile" onclick="showPage('gallery')">
+      <img src="https://i.imgur.com/CJCmqCO.jpg" alt="Gallery">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">📸 Gallery</div>
+        <div class="nav-tile-sub">Mood board vibes</div>
+      </div>
+    </div>
+    <div class="nav-tile" onclick="showPage('tips')">
+      <img src="https://i.imgur.com/RyxlNvd.jpg" alt="Tips">
+      <div class="nav-tile-overlay">
+        <div class="nav-tile-arrow">→</div>
+        <div class="nav-tile-label">💡 Tips</div>
+        <div class="nav-tile-sub">Confidence & self-care</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links">
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: ABOUT
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-about">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:400px;height:400px;background:var(--blush);top:-150px;right:-80px;"></div>
+    <div class="section-eyebrow">About Me</div>
+    <h1 class="section-title">Hi, I'm your<br><em style="font-style:italic;color:var(--deep-rose)">biggest cheerleader</em> 🌷</h1>
+    <p class="section-desc">Welcome to Grace Atllier — your safe, cozy corner of the internet.</p>
+  </div>
+
+  <div class="about-body fade-up">
+    <div class="about-frame-wrap">
+      <!-- ABOUT PHOTO: replace src with your own photo URL -->
+      <div class="about-frame">
+        <img src="https://i.imgur.com/XLGcDUe.jpg" alt="About me">
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-icon">💌</div>
+        <div class="about-badge-text"><strong>Made with love</strong>for every girl out there</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <!-- ABOUT TEXT: edit these paragraphs freely -->
+      <div class="section-eyebrow">My Story</div>
+      <h2 class="section-title" style="margin-bottom:20px;">I'm just a girl who loves <em style="font-style:italic;color:var(--deep-rose)">all things beautiful</em></h2>
+      <p>I created this space as a warm, welcoming corner of the internet for girls like us — girls who love beauty, obsess over outfits, daydream about travel, and live for a good café find.</p>
+      <p>My goal? To help you feel <strong>seen, inspired, and confident</strong> — whether you're figuring out a makeup look, planning your next OOTD, or just looking for a little joy in your day.</p>
+      <p>Everything here is made with love and lots of good vibes. You belong here. 💗</p>
+      <!-- ABOUT TAGS: edit, add, or remove tags freely -->
+      <div class="about-tags" style="margin-top:24px;">
+        <span class="tag tag-pink">💄 Makeup Lover</span>
+        <span class="tag tag-lav">👗 Fashion Addict</span>
+        <span class="tag tag-beige">✈️ Travel Dreamer</span>
+        <span class="tag tag-sage">🍰 Foodie at Heart</span>
+        <span class="tag tag-pink">🌸 Self-Care Queen</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: MAKEUP 💄
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-makeup">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:380px;height:380px;background:var(--blush);top:-120px;right:-60px;"></div>
+    <div class="section-eyebrow">💄 Makeup Inspiration</div>
+    <h1 class="section-title">Glow Up, Gorgeous</h1>
+    <p class="section-desc">Simple, beautiful, and beginner-friendly makeup ideas for every day and every mood.</p>
+  </div>
+
+  <div class="cards-section">
+    <div class="makeup-grid fade-up">
+
+      <!-- ╔══════════════════════════════════════════╗
+           ║  MAKEUP CARD START                       ║
+           ║  To add a 4th card, copy this entire     ║
+           ║  block and paste after the 3rd card.     ║
+           ║  Then update: image src, card-number,    ║
+           ║  card-big-emoji, card-title, card-text,  ║
+           ║  and tip-pill text.                      ║
+           ╚══════════════════════════════════════════╝ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/Khn088n.jpg" alt="Everyday soft glam">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/1ap7Ol6.jpg" alt="Lavender dream eyes">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/qn8HQVM.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+       <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/MeM8hzc.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+             <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/PaakbnY.jpg" alt=>
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+             <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/PLOHh6k.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+             <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/NsWGBzr.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+             <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/Ngd3lcp.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+                   <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/nlMLpLl.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+     <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/HfCN4Dz.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+      
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/e2H2Ae8.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/8pgdP39.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/SQhAc5O.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/mSN3SbR.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/9ef9zXr.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/kdkhEz9.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/5jedbcA.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+
+      <!-- MAKEUP CARD START ══════════════════════════ -->
+      <div class="makeup-card">
+        <div class="makeup-card-inner">
+          <div class="makeup-card-bg">
+            <img src="https://i.imgur.com/fdr59Pp.jpg" alt="No makeup makeup">
+          </div>
+          <div class="card-number"></div>
+          <div class="card-big-emoji"></div>
+          <div class="card-title"></div>
+          <div class="card-text"></div>
+        </div>
+      </div>
+      <!-- MAKEUP CARD END ══════════════════════════ -->
+    </div>
+
+    <div class="divider" style="margin-top:48px;">
+      <div class="divider-line"></div>
+      <span style="color:var(--deep-rose);font-size:0.7rem;letter-spacing:0.15em;">✦ PRO TIP ✦</span>
+      <div class="divider-line"></div>
+    </div>
+    <!-- PRO TIP: edit this quote freely -->
+    <p style="text-align:center;font-size:0.95rem;color:var(--text-mid);font-style:italic;max-width:560px;margin:0 auto;">
+      "Always start with good skincare — hydrated skin is the best base for any makeup look. Primer is your best friend! 🧴"
+    </p>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: OOTD 👗
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-ootd">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:360px;height:360px;background:var(--lavender);top:-100px;left:-60px;"></div>
+    <div class="section-eyebrow">👗 OOTD Inspiration</div>
+    <h1 class="section-title">Dress Your Best Self</h1>
+    <p class="section-desc">Not sure what to wear? Here are cute outfit ideas for every occasion.</p>
+  </div>
+
+  <div class="cards-section" style="background:var(--beige);">
+    <div class="ootd-grid fade-up">
+
+      <!-- ╔══════════════════════════════════════════╗
+           ║  OOTD CARD START                         ║
+           ║  To add a new outfit, copy this entire   ║
+           ║  block and paste after the last card.    ║
+           ║  Update: image src, ootd-emoji,          ║
+           ║  ootd-occasion, ootd-title, and the      ║
+           ║  list items inside <ul>.                 ║
+           ╚══════════════════════════════════════════╝ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/mVxg1U8.jpg" alt="School outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+
+      <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https:/i.imgur.com/KNML73M.jpg" alt="Casual outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+
+      <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/XTYgKXS.jpg" alt="Night out outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+
+      <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/hGEWUct.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/xzoLsgJ.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/2pGcOgS.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/fMWBCpB.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/ckeyYSg.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/UiPQvv3.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+        
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/n0RyceX.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/2fTrbLY.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/C93mPQT.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/30f4UAr.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/yxKm54C.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/gWU5eNy.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/GTtoNIX.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/C1xzlR7.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+         <!-- OOTD CARD START ══════════════════════════ -->
+      <div class="ootd-card">
+        <img class="ootd-img" src="https://i.imgur.com/mIi4ASm.jpg" alt="Weekend chill outfit">
+      </div>
+      <!-- OOTD CARD END ══════════════════════════ -->
+
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: TRAVEL ✈️
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-travel">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:400px;height:400px;background:var(--lavender);top:-130px;right:-80px;"></div>
+    <div class="section-eyebrow">✈️ Travel Inspiration</div>
+    <h1 class="section-title">Wander, Explore & Dream</h1>
+    <p class="section-desc">Add these dreamy places to your travel wishlist — one adventure at a time. 🌍</p>
+  </div>
+
+  <div class="travel-body fade-up">
+
+    <!-- FEATURED DESTINATION: change image, title & description -->
+    <div class="travel-featured">
+      <div class="travel-featured-img">
+        <img src="https://i.imgur.com/H1KBlyb.jpg" alt="Paris France">
+      </div>
+      <div class="travel-featured-content">
+        <div class="section-eyebrow"></div>
+        <h2 class="section-title"></h2>
+        <p class="section-desc"></p>
+      </div>
+      <div class="travel-featured-badge">
+        <span></span>
+        <div style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 10px;line-height:1.6;"></div>
+      </div>
+    </div>
+
+    <div class="travel-grid">
+
+      <!-- ╔══════════════════════════════════════════╗
+           ║  TRAVEL CARD START                       ║
+           ║  To add a destination, copy this entire  ║
+           ║  block and paste after the last card.    ║
+           ║  Update: image src, travel-card-emoji,   ║
+           ║  travel-card-tag, travel-card-title, and ║
+           ║  the travel-highlight items.             ║
+           ╚══════════════════════════════════════════╝ -->
+      <div class="travel-card">
+        <img class="travel-card-img" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=360&fit=crop&auto=format" alt="Kyoto Japan">
+        <div class="travel-card-body">
+          <div class="travel-card-top">
+            <div class="travel-card-emoji">🌸</div>
+            <div class="travel-card-tag">Asia 🌏</div>
+          </div>
+          <div class="travel-card-title">Kyoto, Japan</div>
+          <div class="travel-highlights">
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Cherry blossom season is magical</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Matcha everything, everywhere</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Fushimi Inari torii gates</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Vintage kimono rentals</div>
+          </div>
+        </div>
+      </div>
+      <!-- TRAVEL CARD END ══════════════════════════ -->
+
+      <!-- TRAVEL CARD START ══════════════════════════ -->
+      <div class="travel-card">
+        <img class="travel-card-img" src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=360&fit=crop&auto=format" alt="Santorini Greece">
+        <div class="travel-card-body">
+          <div class="travel-card-top">
+            <div class="travel-card-emoji">🏛️</div>
+            <div class="travel-card-tag">Europe 🌍</div>
+          </div>
+          <div class="travel-card-title">Santorini, Greece</div>
+          <div class="travel-highlights">
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Blue domed churches & sunsets</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>The most aesthetic streets ever</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Fresh seafood by the sea</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Golden hour photography goals</div>
+          </div>
+        </div>
+      </div>
+      <!-- TRAVEL CARD END ══════════════════════════ -->
+
+      <div class="travel-card">
+        <img class="travel-card-img" src="https://i.imgur.com/jqWu6nW.jpeg" alt="Kyoto Japan">
+        <div class="travel-card-body">
+          <div class="travel-card-top">
+            <div class="travel-card-emoji">🇨🇭</div>
+            <div class="travel-card-tag">EUROPE🌍</div>
+          </div>
+          <div class="travel-card-title">Switzerland</div>
+          <div class="travel-highlights">
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Peaceful lakeside mountain scenery</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Classic wooden chalet houses</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Green hills and blooming trees</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Alpine vibes with fresh air and nature</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="travel-card">
+        <img class="travel-card-img" src="https://i.imgur.com/Bv5Hdns.jpeg" alt=".Kyoto Japan">
+        <div class="travel-card-body">
+          <div class="travel-card-top">
+            <div class="travel-card-emoji">🇳🇱</div>
+            <div class="travel-card-tag">EUROPE🌍</div>
+          </div>
+          <div class="travel-card-title">Netherlands</div>
+          <div class="travel-highlights">
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Canals with boats and calm water</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Bicycles everywhere </div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Historic buildings along the water</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Flower decorations on bridges</div>
+            <div class="travel-highlight"><div class="travel-highlight-dot"></div>Chill sunset city vibe</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;font-family:'Dancing Script',cursive;font-size:1.4rem;color:var(--deep-rose);margin-top:50px;">
+      "Collect moments, not just things. ✈️🌸"
+    </p>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: FOOD 🍰
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-food">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:360px;height:360px;background:#fde0c0;top:-110px;left:-60px;"></div>
+    <div class="section-eyebrow">🍰 Foodie Finds</div>
+    <h1 class="section-title">Eat Pretty, Live Yummy</h1>
+    <p class="section-desc">Life is too short for boring food. Here are my favorite foodie discoveries.</p>
+  </div>
+
+  <div class="cards-section">
+    <div class="food-grid fade-up">
+
+      <!-- ╔══════════════════════════════════════════╗
+           ║  FOOD CARD START                         ║
+           ║  To add a new foodie find, copy this     ║
+           ║  entire block and paste after the last.  ║
+           ║  Update: image src, food-card-emoji,     ║
+           ║  food-card-subtitle, food-card-title,    ║
+           ║  food-card-desc, and the star rating.    ║
+           ╚══════════════════════════════════════════╝ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://imgur.com/5X7pV3a.jpg" alt="Matcha latte">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+      <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/BfJVgSu.jpg" alt="Strawberry cake">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+      <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/8PlfDPe.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+      <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/o1VwtSX.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+            <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/UF6U9Mi.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+            <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/bsOHFXK.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+      <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/nUSXUYD.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+            <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/u9vVHe2.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+            <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/KoB9fHO.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+            <!-- FOOD CARD START ══════════════════════════ -->
+      <div class="food-card">
+        <img class="food-card-img" src="https://i.imgur.com/sLHhkUl.jpg" alt="Buddha bowl">
+      </div>
+      <!-- FOOD CARD END ══════════════════════════ -->
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: GALLERY 📸
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-gallery">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:380px;height:380px;background:var(--blush);top:-110px;right:-60px;"></div>
+    <div class="section-eyebrow">📸 Inspiration Gallery</div>
+    <h1 class="section-title">Your Daily Mood Board</h1>
+    <p class="section-desc">A visual escape of all things beautiful — beauty, fashion, travel, and food.</p>
+  </div>
+
+  <div class="gallery-body fade-up">
+    <div class="gallery-grid">
+
+      <!-- ╔══════════════════════════════════════════╗
+           ║  GALLERY ITEM START                      ║
+           ║  To add a photo, copy this entire block  ║
+           ║  and paste anywhere inside gallery-grid. ║
+           ║  For a wide photo, add:                  ║
+           ║    style="grid-column:span 2"            ║
+           ║  to the outer div.                       ║
+           ╚══════════════════════════════════════════╝ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/BOjfv1M.jpg" style="object-position: center center; alt="Café aesthetic">
+        <div class="gallery-item-label"></div>
+</div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+       <img src="https://i.imgur.com/djCNo2e.jpg" alt="Café aesthetic">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+      <img src="https://i.imgur.com/G64GxVV.jpeg" alt="pic ni grace">
+       <div class="gallery-item-label"></div>
+</div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+        <img src="https://i.imgur.com/wMMHn6g.jpg" alt="OOTD fashion">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+        <img src="https://i.imgur.com/XLGcDUe.jpg" alt="Wanderlust">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/y6nFulm.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+    <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+        <img src="https://i.imgur.com/BoFOhWr.jpg" alt="Wanderlust">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+      <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+        <img src="https://i.imgur.com/QeHOaVW.jpg" style="object-position: center left; alt="Wanderlust">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+       <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/C5xVG3M.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+       <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/ktuNsi9.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+             <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item">
+        <img src="https://i.imgur.com/sucFVAf.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+             <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" >
+        <img src="https://i.imgur.com/zZjtMW6.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+                   <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" >
+        <img src="https://i.imgur.com/6PJcEoA.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+                   <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" >
+        <img src="https://i.imgur.com/H3WiMAl.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+             <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/ysAdZrd.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+       <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/uFxFqYy.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+       <!-- GALLERY ITEM START ══════════════════════════ -->
+      <div class="gallery-item" style="grid-column:span 2;">
+        <img src="https://i.imgur.com/zLJSQgh.jpg" alt="Foodie heaven">
+        <div class="gallery-item-label"></div>
+      </div>
+      <!-- GALLERY ITEM END ══════════════════════════ -->
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: TIPS 💡
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-tips">
+  <div class="page-header">
+    <div class="page-header-blob" style="width:380px;height:380px;background:var(--lavender);top:-130px;left:-60px;"></div>
+    <div class="section-eyebrow">💡 Tips & Advice</div>
+    <h1 class="section-title">Little Things That Make<br>a <em style="font-style:italic;color:var(--deep-rose)">Big Difference</em></h1>
+    <p class="section-desc">Small reminders for confident, beautiful, joyful living.</p>
+  </div>
+
+  <div class="cards-section">
+    <div class="tips-grid fade-up">
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/RK9ikmv.jpeg" alt="Confidence">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/6rZ2yvb.jpg" alt="Skincare">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/RyxlNvd.jpg" alt="Style">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/DgEiRVQ.jpg" alt="Rest">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/iBFteUc.jpg" alt="Moments">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/S4SWOaL.jpg" alt="Try Something New">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+      <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/BoK69eo.jpg" alt="Try Something New">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+           <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/Va6vTRC.jpg" alt="Try Something New">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+           <!-- TIP CARD START ══════════════════════════ -->
+      <div class="tip-card">
+        <img src="https://i.imgur.com/Tn6Dnaf.jpg" alt="Try Something New">
+      </div>
+      <!-- TIP CARD END ══════════════════════════ -->
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ████████████████████████████████████████████
+     PAGE: CONTACT 💌
+     ████████████████████████████████████████████ -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <div class="section-eyebrow">💌 Connect with Me</div>
+    <h1 class="section-title">Let's Be Friends!</h1>
+    <p class="section-desc">Follow along for daily inspiration, OOTD drops, beauty tips, and cozy vibes. 🌸</p>
+  </div>
+
+  <div class="contact-body fade-up">
+    <!-- SOCIAL LINKS: replace # with your actual profile URLs -->
+    <div class="social-links">
+      <a href="#" class="social-btn"><span>📸</span> Instagram</a>
+      <a href="#" class="social-btn"><span>🎵</span> TikTok</a>
+      <a href="#" class="social-btn"><span>📌</span> Pinterest</a>
+      <a href="#" class="social-btn"><span>▶️</span> YouTube</a>
+      <a href="#" class="social-btn"><span>💬</span> Twitter / X</a>
+    </div>
+
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-bottom:20px;">Or drop your email to stay in the loop with new posts 💌</p>
+
+    <div class="contact-form-row">
+      <input type="email" class="contact-input" placeholder="your@email.com">
+      <a href="#" class="btn-primary" style="white-space:nowrap;">Subscribe 🌸</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Grace Atllier ✿</div>
+    <div class="footer-text">© 2025 Grace Atllier · Made with love & good vibes 🌸</div>
+    <div class="footer-links"><a onclick="showPage('home')">← Back Home</a></div>
+  </footer>
+</div>
+
+
+<!-- ============================================================
+     MODAL — Tips & Makeup Tutorial
+     ============================================================ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-close">
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+
+/* ── PAGE ROUTING ─────────────────────────────────────────── */
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + name);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === name);
+  });
+  setTimeout(runFadeUps, 80);
+}
+
+function runFadeUps() {
+  const els = document.querySelectorAll('.page.active .fade-up:not(.visible)');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => obs.observe(el));
+}
+runFadeUps();
+
+/* ── MODAL SYSTEM ─────────────────────────────────────────── */
+function openModal(html) {
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ══════════════════════════════════════════════════════════════
+   TIPS DATA
+   — Edit each tip: change title, icon, heroImg, body, tips[],
+     photos[], and quote. Add more objects to add more tips.
+   ══════════════════════════════════════════════════════════════ */
+const TIPS_DATA = [
+  {
+    id: 'confidence',
+    icon: '💅',
+    title: 'Your Confidence is the Best Accessory',
+    badge: 'Mindset & Confidence',
+    heroImg: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=780&h=400&fit=crop&auto=format',
+    body: 'Confidence isn\'t something you\'re born with — it\'s something you build every single day. It\'s the way you hold yourself, the way you speak, and the way you choose to show up for yourself even when it\'s hard. No outfit, no filter, and no highlighter can match the glow of a girl who truly believes in herself.',
+    tips: [
+      'Stand in front of the mirror every morning and say one kind thing to yourself — out loud.',
+      'Wear the outfit you\'ve been "saving for the right occasion." Today IS the occasion.',
+      'Stop apologizing for taking up space. You belong in every room you walk into.',
+      'Surround yourself with people who celebrate you, not just tolerate you.',
+      'Fake it till you feel it — walk tall, shoulders back, chin up. Your body language shapes your mood.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"She remembered who she was and the game changed." 🌸',
+  },
+  {
+    id: 'skincare',
+    icon: '🧴',
+    title: 'Build a Simple Self-Care Routine',
+    badge: 'Skincare & Self-Care',
+    heroImg: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=780&h=400&fit=crop&auto=format',
+    body: 'You don\'t need a 12-step routine or a $200 serum to have glowing skin. The secret is consistency. A simple, gentle routine done every single day will always beat an elaborate one done once a week.',
+    tips: [
+      'AM routine: cleanser → moisturizer → SPF. That\'s literally all you need to start.',
+      'Never skip sunscreen — it\'s the #1 anti-aging product that actually works.',
+      'Change your pillowcase at least twice a week. Your skin will thank you.',
+      'Drink water first thing in the morning before anything else. Start your day hydrated.',
+      'Less is more — don\'t layer too many active ingredients. Pick one and be consistent.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1509909756405-be0199881695?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"Glow up starts from within — and from your cleanser. 🧴✨"',
+  },
+  {
+    id: 'style',
+    icon: '🎨',
+    title: 'Experiment Freely with Style',
+    badge: 'Fashion & Style',
+    heroImg: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=780&h=400&fit=crop&auto=format',
+    body: 'Your wardrobe is a canvas and you are the artist. Fashion has no rules — it\'s a form of self-expression, and the most stylish girls are the ones who wear what makes THEM feel alive, not what the algorithm tells them is trending.',
+    tips: [
+      'Build around basics first: white tee, straight jeans, a good blazer. Then add personality on top.',
+      'Don\'t fear color! Start with one colorful piece and let it be the star of the outfit.',
+      'Thrift stores are goldmines — some of the most iconic pieces are secondhand finds.',
+      'Pinterest boards are your best planning tool. Save everything that makes your heart jump.',
+      'Fit matters more than brand. A well-fitting $15 top > an ill-fitting $150 one, always.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"Style is a way to say who you are without having to speak." 👗',
+  },
+  {
+    id: 'rest',
+    icon: '🌿',
+    title: 'Rest is Productive Too',
+    badge: 'Wellness & Balance',
+    heroImg: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=780&h=400&fit=crop&auto=format',
+    body: 'We live in a world that glorifies being busy, but here\'s the truth: burnout is not a badge of honor. Rest is not laziness — it\'s maintenance. You cannot pour from an empty cup, and the most productive version of you is a well-rested, nourished, and cared-for you.',
+    tips: [
+      'Create a wind-down routine: dim lights, no screens 30 mins before bed, a warm drink.',
+      'Take a "soft girl" day once a week — no agenda, just rest and things that fill you up.',
+      'Naps are not a sign of weakness. A 20-minute nap can reset your whole afternoon.',
+      'Say no to things that drain you without guilt. Protecting your energy is self-care.',
+      'Your skin, mood, and focus are all better when you\'re sleeping 7–9 hours. Prioritize it.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"Rest and self-care are so important. When you take time to replenish your spirit, it allows you to serve from the overflow." 🌿',
+  },
+  {
+    id: 'moments',
+    icon: '📸',
+    title: 'Capture Moments for You, Not the Feed',
+    badge: 'Mindfulness',
+    heroImg: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=780&h=400&fit=crop&auto=format',
+    body: 'The most beautiful memories aren\'t always the most "Instagram-worthy" ones. Some of the best moments of your life will be blurry, poorly-lit, and absolutely perfect. Take photos for you — to remember how something felt, not just how it looked.',
+    tips: [
+      'Before reaching for your phone, take 30 seconds to just absorb the moment with your eyes.',
+      'Print your favorite photos. Digital memories get lost; physical ones become treasures.',
+      'Go on solo dates and document them. A coffee shop, a walk, a bookstore — all worth capturing.',
+      'Stop deleting "imperfect" photos. Ten years from now, you\'ll love them all.',
+      'Put your phone away during meals and conversations. Some memories live best in your heart.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"Take photos that make you feel something, not just look a certain way. 📸"',
+  },
+  {
+    id: 'new',
+    icon: '🌺',
+    title: 'Try Something New Every Week',
+    badge: 'Growth & Adventure',
+    heroImg: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=780&h=400&fit=crop&auto=format',
+    body: 'The version of yourself you\'re trying to become is on the other side of something you haven\'t tried yet. Growth doesn\'t have to be dramatic — it can be as small as ordering a different coffee, taking a different route, or trying a new lip color. Every little "new" thing adds up.',
+    tips: [
+      'Keep a "try list" — a running note of things you\'re curious about. Add to it, then actually do them.',
+      'Say yes to one invitation per week that makes you slightly nervous. That\'s where the magic is.',
+      'Try a new recipe every two weeks. Cooking something new feels so satisfying.',
+      'Visit a café or restaurant you\'ve never been to. Solo dates are especially good for this.',
+      'Learn one tiny skill this month — nail art, a chord on guitar, a new language phrase.',
+    ],
+    photos: [
+      'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=380&h=260&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=380&h=260&fit=crop&auto=format',
+    ],
+    quote: '"Life begins at the end of your comfort zone. 🌺"',
+  },
+];
+
+function openTipModal(id) {
+  const tip = TIPS_DATA.find(t => t.id === id);
+  if (!tip) return;
+  const html = `
+    <img class="modal-hero-img" src="${tip.heroImg}" alt="${tip.title}">
+    <div class="modal-body">
+      <div class="modal-eyebrow">${tip.badge}</div>
+      <div class="modal-title">${tip.icon} ${tip.title}</div>
+      <p class="modal-text">${tip.body}</p>
+      <ul class="modal-tips-list">
+        ${tip.tips.map(t => `<li>${t}</li>`).join('')}
+      </ul>
+      <div class="modal-photos">
+        ${tip.photos.map(p => `<img src="${p}" alt="Tip photo">`).join('')}
+      </div>
+      <span class="modal-quote">${tip.quote}</span>
+    </div>`;
+  openModal(html);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MAKEUP TUTORIAL DATA
+   — Edit each look: change title, difficulty, time, heroImg,
+     intro, steps (title + text + optional img), and products[].
+   ══════════════════════════════════════════════════════════════ */
+const MAKEUP_DATA = [
+  {
+    id: 'softglam',
+    emoji: '🌹',
+    title: 'Everyday Soft Glam',
+    difficulty: 'Beginner Friendly',
+    time: '10 minutes',
+    heroImg: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=780&h=380&fit=crop&auto=format',
+    intro: 'A rosy, effortless look that takes just 10 minutes. This is the look for when you want to look put-together without looking like you tried too hard. Dewy, glowy, and so pretty.',
+    steps: [
+      {
+        title: 'Prep Your Skin',
+        text: 'Start with a clean, moisturized face. Apply a lightweight primer or just pat in your moisturizer well. Hydrated skin = glowy makeup. Let it sink in for 2 minutes.',
+        img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Light Base Coverage',
+        text: 'Apply a tinted moisturizer or light foundation with your fingers or a damp sponge. Blend outward in gentle tapping motions. We want "your skin but better," not a mask. Spot-conceal only where needed.',
+        img: null,
+      },
+      {
+        title: 'Rosy Cheeks & Nose',
+        text: 'Smile and dust a soft pink blush on the apples of your cheeks, blending upward toward your temples. Add a tiny bit on the tip of your nose for that sun-kissed look. This is the HEART of soft glam!',
+        img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Neutral Shimmer Eyes',
+        text: 'Sweep a champagne or light pink shimmer shadow across your lids with your finger. No brush needed! Add a bit of mascara — wiggle the wand at the root and pull up. Two coats for drama.',
+        img: null,
+      },
+      {
+        title: 'Glossy Lip Finish',
+        text: 'Apply a sheer pink lip gloss or a tinted lip balm. This is the step that ties the whole look together. You want your lips to look juicy and hydrated. Reapply throughout the day!',
+        img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=720&h=280&fit=crop&auto=format',
+      },
+    ],
+    products: ['Tinted Moisturizer', 'Pink Blush', 'Champagne Eyeshadow', 'Mascara', 'Pink Lip Gloss', 'Setting Spray'],
+  },
+  {
+    id: 'lavender',
+    emoji: '💜',
+    title: 'Lavender Dream Eyes',
+    difficulty: 'Intermediate',
+    time: '20 minutes',
+    heroImg: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=780&h=380&fit=crop&auto=format',
+    intro: 'Dreamy purple hues and shimmery lids that make your eyes pop. This look is romantic, feminine, and absolutely stunning for dates, parties, or any occasion where you want to feel like a fairy.',
+    steps: [
+      {
+        title: 'Prime Your Eyelids',
+        text: 'Apply an eyeshadow primer or tap a thin layer of concealer on your lids. This makes your eyeshadow last all day and appear more vibrant. Let it set for 30 seconds.',
+        img: null,
+      },
+      {
+        title: 'Apply Soft Lavender Base',
+        text: 'With a flat shader brush, press a light lavender matte shadow across your entire lid. Don\'t blend yet — just pack the color on first for maximum pigment payoff.',
+        img: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Add Depth with Plum',
+        text: 'With a fluffy blending brush and a deeper plum shadow, blend into the outer corner and crease in a windshield-wiper motion. Keep blending until there are no harsh edges.',
+        img: null,
+      },
+      {
+        title: 'Shimmer Topper Magic',
+        text: 'Using your finger or a small packed brush, press a violet or holographic shimmer onto the center of the lid only. The contrast between matte and shimmer is what makes this look stunning.',
+        img: 'https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Lower Lashline & Liner',
+        text: 'Smudge a tiny bit of the plum shadow under your lower lash line using a small brush. You can also add a purple or brown liner to your waterline for more definition.',
+        img: null,
+      },
+      {
+        title: 'Lashes & Nude Lip',
+        text: 'Curl your lashes and apply 2–3 coats of volumizing mascara. Pair with a nude-pink lip so the eyes are the star. A touch of highlighter on the cupid\'s bow and inner corners = chef\'s kiss.',
+        img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=720&h=280&fit=crop&auto=format',
+      },
+    ],
+    products: ['Eyeshadow Primer', 'Lavender Matte Shadow', 'Plum Shadow', 'Violet Shimmer', 'Purple Liner', 'Mascara', 'Nude Lip Gloss', 'Highlighter'],
+  },
+  {
+    id: 'nomakeup',
+    emoji: '☀️',
+    title: 'No-Makeup Makeup',
+    difficulty: 'Super Easy',
+    time: '5 minutes',
+    heroImg: 'https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?w=780&h=380&fit=crop&auto=format',
+    intro: 'The art of looking like you\'re wearing nothing while actually wearing something. This is your lazy girl go-to — the look that makes people say "wow your skin is so nice!" and you just smile and say "thanks, I drink water."',
+    steps: [
+      {
+        title: 'Skincare First (Always!)',
+        text: 'Wash your face, pat dry, apply a hydrating serum + moisturizer. Wait 2 minutes. Dewy, plump skin is the foundation of this entire look. SPF if you\'re going outside!',
+        img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Color Correct & Conceal (Minimal)',
+        text: 'Skip foundation! Use a tiny amount of concealer only where you actually need it — under-eyes, any blemishes, or redness around the nose. Blend with your ring finger (warmth = seamless blend).',
+        img: null,
+      },
+      {
+        title: 'Brow Gel',
+        text: 'Brush your brows up with a clear or tinted brow gel. Groomed brows instantly make you look more "done" without any actual effort. This is the no-makeup look\'s secret weapon.',
+        img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=720&h=280&fit=crop&auto=format',
+      },
+      {
+        title: 'Cream Blush with Fingers',
+        text: 'Dot a cream blush on the high points of your cheeks and blend with your fingers. The goal is to look like you just came in from a light jog or a warm room. Natural and flushed.',
+        img: null,
+      },
+      {
+        title: 'Mascara on Top Lashes Only',
+        text: 'One coat of mascara on the top lashes only. Don\'t wiggle too much — we want lengthened, not dramatic. Skip the bottom lashes for a more natural finish.',
+        img: null,
+      },
+      {
+        title: 'Clear Gloss or Tinted Balm',
+        text: 'Finish with a clear lip gloss, tinted lip balm, or Vaseline. Your lips should look hydrated and pretty — not done up. That\'s the whole vibe. You\'re done in 5 minutes! 🌸',
+        img: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=720&h=280&fit=crop&auto=format',
+      },
+    ],
+    products: ['Hydrating Serum', 'SPF Moisturizer', 'Concealer', 'Clear Brow Gel', 'Cream Blush', 'Mascara', 'Clear Lip Gloss'],
+  },
+];
+
+function openMakeupModal(id) {
+  const look = MAKEUP_DATA.find(m => m.id === id);
+  if (!look) return;
+  const stepsHtml = look.steps.map((s, i) => `
+    <div class="step-card">
+      <div class="step-num">${i + 1}</div>
+      <div class="step-content">
+        <div class="step-title">${s.title}</div>
+        <div class="step-text">${s.text}</div>
+        ${s.img ? `<img class="step-img" src="${s.img}" alt="${s.title}">` : ''}
+      </div>
+    </div>
+    ${i < look.steps.length - 1 ? '<div class="tutorial-divider"></div>' : ''}
+  `).join('');
+
+  const html = `
+    <img class="tutorial-hero" src="${look.heroImg}" alt="${look.title}">
+    <div class="tutorial-header">
+      <div class="tutorial-badge">⏱ ${look.time} &nbsp;·&nbsp; ${look.difficulty}</div>
+      <div class="modal-title">${look.emoji} ${look.title}</div>
+      <p class="modal-text">${look.intro}</p>
+    </div>
+    <div class="tutorial-steps">
+      ${stepsHtml}
+      <div class="products-section">
+        <div class="products-title">🛍️ Products You'll Need</div>
+        <div class="products-grid">
+          ${look.products.map(p => `<span class="product-tag">${p}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  openModal(html);
+}
+
+</script>
+</body>
+</html>
